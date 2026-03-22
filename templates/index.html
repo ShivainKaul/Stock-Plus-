@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StockPlus — AI-Powered Stock Sentiment Analysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<!-- ── Background grid ─────────────────────────────────────────── -->
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+
+<!-- ── Header ─────────────────────────────────────────────────── -->
+<header>
+  <div class="logo">
+    <span class="logo-icon">⬡</span>
+    <span class="logo-text">Stock<em>Plus</em></span>
+  </div>
+  <p class="tagline">News Sentiment · Stock Intelligence</p>
+</header>
+
+<!-- ── Hero / Search ──────────────────────────────────────────── -->
+<section class="hero">
+  <h1>What's the market<br /><span class="accent">saying today?</span></h1>
+  <p class="sub">Enter a stock ticker and StockPlus will fetch the latest news,
+     analyse sentiment, and predict short-term price movement.</p>
+
+  <div class="search-bar">
+    <input id="tickerInput" type="text" placeholder="e.g.  AAPL  ·  TSLA  ·  MSFT"
+           maxlength="10" autocomplete="off" spellcheck="false" />
+    <button id="analyzeBtn" onclick="runAnalysis()">
+      <span class="btn-text">Analyse</span>
+      <span class="btn-icon">→</span>
+    </button>
+  </div>
+  <p class="disclaimer"> </p>
+</section>
+
+<!-- ── Loading spinner ────────────────────────────────────────── -->
+<div id="loader" class="loader hidden">
+  <div class="spinner"></div>
+  <p>Fetching news &amp; crunching numbers…</p>
+</div>
+
+<!-- ── Error banner ───────────────────────────────────────────── -->
+<div id="errorBanner" class="error-banner hidden"></div>
+
+<!-- ── Results ────────────────────────────────────────────────── -->
+<main id="results" class="hidden">
+
+  <!-- KPI strip -->
+  <section class="kpi-strip" id="kpiStrip"></section>
+
+  <!-- Two-column layout -->
+  <div class="grid-2">
+
+    <!-- Prediction card -->
+    <div class="card card-prediction" id="predictionCard">
+      <div class="card-label">ML Prediction</div>
+      <div class="prediction-badge" id="predBadge">—</div>
+      <div class="confidence-bar-wrap">
+        <div class="confidence-bar" id="confBar"></div>
+      </div>
+      <p class="confidence-text" id="confText"></p>
+      <p class="model-note" id="modelNote"></p>
+    </div>
+
+    <!-- Sentiment donut -->
+    <div class="card">
+      <div class="card-label">Sentiment Breakdown</div>
+      <div class="donut-wrap">
+        <canvas id="sentimentChart"></canvas>
+        <div class="donut-center" id="donutCenter"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Price chart (full width) -->
+  <div class="card card-chart">
+    <div class="card-label">Price History — <span id="chartTicker"></span></div>
+    <canvas id="priceChart"></canvas>
+  </div>
+
+  <!-- News articles -->
+  <div class="card">
+    <div class="card-label">Latest News &amp; Sentiment</div>
+    <div id="articlesList" class="articles-list"></div>
+  </div>
+
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────────── -->
+<footer>
+  <p>StockPlus </p>
+</footer>
+
+<script src="/static/main.js"></script>
+</body>
+</html>
